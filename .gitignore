@@ -1,0 +1,36 @@
+# env
+.env
+
+#tests
+create_admin.bat
+run.bat
+seed.bat
+seed_data.py
+seed_data_old.py
+
+# python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# venv
+.venv/
+env/
+
+# db
+db.sqlite3
+
+# static
+staticfiles/
+media/
+
+# IDE
+.vscode/
+.idea/
+
+# logs
+*.log
+
+# OS
+.DS_Store

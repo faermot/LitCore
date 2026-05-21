@@ -1,0 +1,76 @@
+:root {
+  --litcore-orange: #FF6B35;
+  --litcore-orange-dark: #e85a24;
+}
+
+.brand-link {
+  background: #1a1a2e !important;
+  border-bottom: 1px solid rgba(255,107,53,0.3) !important;
+}
+.brand-link .brand-text {
+  font-weight: 800 !important;
+  font-size: 20px !important;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #FF6B35, #ff9a6c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.main-sidebar, .sidebar {
+  background: #1a1a2e !important;
+}
+.sidebar .nav-sidebar > .nav-item > .nav-link {
+  color: rgba(255,255,255,0.75) !important;
+}
+.sidebar .nav-sidebar > .nav-item > .nav-link:hover,
+.sidebar .nav-sidebar > .nav-item.menu-open > .nav-link {
+  color: #fff !important;
+  background: rgba(255,107,53,0.15) !important;
+}
+.sidebar .nav-sidebar > .nav-item > .nav-link.active {
+  color: #fff !important;
+  background: rgba(255,107,53,0.25) !important;
+  border-left: 3px solid #FF6B35;
+}
+
+.btn-primary, input[type=submit].default {
+  background: #FF6B35 !important;
+  border-color: #FF6B35 !important;
+}
+.btn-primary:hover {
+  background: #e85a24 !important;
+  border-color: #e85a24 !important;
+}
+
+.main-header.navbar {
+  border-bottom: 2px solid #FF6B35 !important;
+}
+
+.image-preview-wrap {
+  margin-top: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+  display: inline-block;
+  position: relative;
+  max-width: 320px;
+  cursor: crosshair;
+  border: 2px solid #dee2e6;
+}
+.image-preview-wrap img {
+  display: block;
+  max-width: 100%;
+}
+.crop-overlay {
+  position: absolute;
+  border: 2px dashed #FF6B35;
+  background: rgba(255,107,53,0.12);
+  pointer-events: none;
+}
+
+.color-field-wrap { display: flex; align-items: center; gap: 10px; }
+
+.dynamic-buy_links .field-color input[type=color] {
+  width: 52px; height: 32px; padding: 2px; border: none; cursor: pointer;
+  border-radius: 4px;
+}

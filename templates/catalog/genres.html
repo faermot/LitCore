@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Жанры — LitCore{% endblock %}
+{% block content %}
+<h1 class="page-title">Жанры</h1>
+<div class="genres-grid">
+  {% for genre in genres %}
+    <a href="{{ genre.get_absolute_url }}" class="genre-card">
+      {% if genre.image %}
+        <div class="genre-card__bg" style="background-image: url('{{ genre.image.url }}');"></div>
+      {% else %}
+        <div class="genre-card__bg" style="background-color: {{ genre.color }};"></div>
+      {% endif %}
+      <div class="genre-card__overlay"></div>
+      <div class="genre-card__content">
+        <div class="genre-card__name">{{ genre.name }}</div>
+        <div class="genre-card__count">{{ genre.book_count_str }}</div>
+      </div>
+    </a>
+  {% endfor %}
+</div>
+{% endblock %}

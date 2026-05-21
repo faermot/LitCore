@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Вход - LitCore{% endblock %}
+{% block content %}
+<div class="auth-wrap">
+  <div class="auth-card">
+    <h1 class="auth-title">Вход</h1>
+    <form method="post" class="auth-form">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group">
+          <label class="form-label">{{ field.label }}</label>
+          {{ field }}
+          {% if field.errors %}
+            <div class="form-error">{{ field.errors|join:', ' }}</div>
+          {% endif %}
+        </div>
+      {% endfor %}
+      <button type="submit" class="btn btn--primary btn--full">Войти</button>
+    </form>
+    <p class="auth-link">Нет аккаунта? <a href="{% url 'register' %}">Зарегистрироваться</a></p>
+  </div>
+</div>
+{% endblock %}

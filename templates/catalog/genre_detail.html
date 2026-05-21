@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}{{ genre.name }} — LitCore{% endblock %}
+
+{% block content %}
+<!-- Баннер жанра — от края до края основного контента -->
+<div class="genre-banner">
+  {% if genre.image %}
+    <div class="genre-banner__bg" style="background-image: url('{{ genre.image.url }}');"></div>
+  {% else %}
+    <div class="genre-banner__bg" style="background-color: {{ genre.color }};"></div>
+  {% endif %}
+  <div class="genre-banner__gradient"></div>
+  <div class="genre-banner__content">
+    <h1 class="genre-banner__title">{{ genre.name }}</h1>
+    {% if genre.description %}
+      <p class="genre-banner__desc">{{ genre.description }}</p>
+    {% endif %}
+    <span class="genre-banner__count">{{ book_count_str }}</span>
+  </div>
+</div>
+
+<div class="books-grid" style="margin-top: 28px;">
+  {% for book in books %}
+    {% include 'catalog/_book_card.html' %}
+  {% empty %}
+    <p class="empty-msg">В этом жанре пока нет книг</p>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block title %}{{ book.title }} — LitCore{% endblock %}
+
+{% block content %}
+<div class="book-detail">
+  <div class="book-detail__cover-col">
+    {% if book.cover %}
+      <img class="book-detail__cover" src="{{ book.cover.url }}" alt="{{ book.title }}">
+    {% else %}
+      <div class="book-detail__no-cover">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+        </svg>
+      </div>
+    {% endif %}
+
+    <button class="btn fav-btn-detail {% if is_favorite %}fav-btn--active{% endif %}"
+            data-book-id="{{ book.id }}">
+      <svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+           fill="{% if is_favorite %}#FF6B35{% else %}none{% endif %}">
+        <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+      </svg>
+      {% if is_favorite %}Убрать из избранного{% else %}В избранное{% endif %}
+    </button>
+  </div>
+
+  <div class="book-detail__info-col">
+    <h1 class="book-detail__title">{{ book.title }}</h1>
+
+    <div class="book-detail__meta">
+      <div class="book-detail__meta-row">
+        <span class="meta-label">Авторы</span>
+        <span>
+          {% for author in book.authors.all %}
+            <a href="{{ author.get_absolute_url }}" class="meta-link">{{ author.name }}</a>{% if not forloop.last %}, {% endif %}
+          {% endfor %}
+        </span>
+      </div>
+      <div class="book-detail__meta-row">
+        <span class="meta-label">Жанры</span>
+        <span>
+          {% for genre in book.genres.all %}
+            <a href="{{ genre.get_absolute_url }}" class="meta-link">{{ genre.name }}</a>{% if not forloop.last %}, {% endif %}
+          {% endfor %}
+        </span>
+      </div>
+      {% if book.year %}
+      <div class="book-detail__meta-row">
+        <span class="meta-label">Год</span>
+        <span>{{ book.year }}</span>
+      </div>
+      {% endif %}
+      {% if book.rating %}
+      <div class="book-detail__meta-row">
+        <span class="meta-label">Рейтинг</span>
+        <span class="rating-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#FF6B35" stroke="none">
+            <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
+          </svg>
+          {{ book.rating }}
+        </span>
+      </div>
+      {% endif %}
+    </div>
+
+    {% if book.description %}
+    <div class="book-detail__desc">
+      <h2>Описание</h2>
+      <p>{{ book.description }}</p>
+    </div>
+    {% endif %}
+
+    {% if book.buy_links.all %}
+    <div class="book-detail__buy">
+      <h2>Где купить</h2>
+      <div class="buy-links">
+        {% for link in book.buy_links.all %}
+          <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer"
+             class="buy-btn"
+             style="background-color: {{ link.color }};">
+            {% if link.icon %}
+              <img src="{{ link.icon.url }}" alt="" class="buy-btn__icon">
+            {% endif %}
+            <span>{{ link.store }}</span>
+            <svg class="buy-btn__arrow" width="12" height="12" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="7" y1="17" x2="17" y2="7"/>
+              <polyline points="7,7 17,7 17,17"/>
+            </svg>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Все книги — LitCore{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1 class="page-title">Все книги</h1>
+  <div class="genre-filter">
+    <a href="/" class="genre-tag {% if not active_genre %}genre-tag--active{% endif %}">Все</a>
+    {% for genre in genres %}
+      <a href="/?genre={{ genre.slug }}"
+         class="genre-tag {% if active_genre == genre.slug %}genre-tag--active{% endif %}">
+        {{ genre.name }}
+      </a>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="books-grid" id="books-grid">
+  {% for book in books %}
+    {% include 'catalog/_book_card.html' %}
+  {% empty %}
+    <p class="empty-msg">Книги в этом жанре не найдены</p>
+  {% endfor %}
+</div>
+
+{% if has_next %}
+  <div class="load-more-wrap">
+    <button class="btn btn--primary load-more-btn" id="load-more"
+            data-page="2"
+            data-genre="{{ active_genre }}">
+      Загрузить ещё
+    </button>
+    <div class="spinner" id="spinner" style="display:none"></div>
+  </div>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/lazy_load.js' %}"></script>
+{% endblock %}
